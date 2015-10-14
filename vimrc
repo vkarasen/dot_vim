@@ -9,7 +9,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
-" " required! 
+" " required!
 Plugin 'VundleVim/Vundle.vim'
 
 " {{{ Github repositories
@@ -27,6 +27,10 @@ Plugin 'nachumk/systemverilog.vim'
 Plugin 'yegappan/mru'
 Plugin 'Shougo/unite.vim'
 Plugin 'vim-scripts/Super-Shell-Indent'
+Plugin 'bling/vim-airline'
+if executable('python')
+    Plugin 'sjl/gundo.vim'
+endif
 
 " }}}
 
@@ -92,8 +96,7 @@ au GUIEnter * simalt ~x
 set guioptions=m
 
 "best colorscheme out there <3
-silent! colo xoria256 
-set guifont=consolas:h10
+silent! colo xoria256
 
 "fix backspace
 set backspace=indent,eol,start
@@ -123,12 +126,21 @@ set gdefault
 set nowrap
 " Wrap at word
 set linebreak
+
 set formatoptions=q
 if v:version > 703
     set formatoptions+=j
 endif
 
 set textwidth=100
+
+
+if &term =~ '256color'
+	" Disable Background Color Erase (BCE) so that color schemes
+	"   " work properly when Vim is used inside tmux and GNU screen.
+	"     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+	set t_ut=
+endif
 
 " }}}
 
@@ -137,30 +149,35 @@ set textwidth=100
 "fast access to the vimrc
 com! Vimrc e ~/.vimrc
 
+com! Be Unite buffer
+
 " }}}
 
 " {{{ Aucmds
 
 " {{{ Filetype specific options
-au FileType tex setlocal formatoptions+=t | setlocal spell
+au! FileType tex setlocal formatoptions+=t | setlocal spell
 
-au! FileType vim setlocal foldmethod=marker 
-            
+au! FileType vim setlocal foldmethod=marker
+
 " }}}
 
 "small trick to invoke the latex suite when I'm editing something out of
 "pentadactyl
-au BufEnter *.tmp set ft=tex
+au! BufEnter *.tmp set filetype=tex
 
-" sources the vimrc instantly after writing
-au! BufWritePost .vimrc source %
+au! BufNewFile *.vhd 0r ~/vkarasen-config/vim/skeleton.vhd
 
-au BufNewFile *.vhd 0r ~/vkarasen-config/vim/skeleton.vhd
+au! BufEnter wscript* set filetype=python
 
-autocmd BufNewFile,BufRead wscript* set filetype=python
+au! BufEnter *vimrc set filetype=vim
+
+" sources vim filetypes instantly after writing
+" au! BufWritePost filetype=vim source % | <silent> AirlineRefresh
+au! BufWritePost * if &ft ==# 'vim' | source % | :silent AirlineRefresh | endif
 
 " this hides matching parentheses in tex files
-autocmd filetype tex hi MatchParen ctermbg=black guibg=black
+au! filetype tex hi MatchParen ctermbg=black guibg=black
 
 " }}}
 
@@ -213,13 +230,25 @@ vnoremap X "_X
 
 " }}}
 
+"{{{ Plugin specific stuff
 
-if &term =~ '256color'
-	" Disable Background Color Erase (BCE) so that color schemes
-	"   " work properly when Vim is used inside tmux and GNU screen.
-	"     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
-	set t_ut=
-endif
+" Gundo
+nnoremap <silent> <leader>gt :GundoToggle<CR>
+" this moves the preview window below active window instead of tree
+let g:gundo_preview_bottom = 1
 
+" {{{ Statusline
 
+" enable statusline
+set laststatus=2
+set noshowmode
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+let g:airline#extensions#whitespace#enabled = 0
+
+" }}}
+
+" }}}
