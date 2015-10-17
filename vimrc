@@ -160,6 +160,8 @@ au! FileType tex setlocal formatoptions+=t | setlocal spell
 
 au! FileType vim setlocal foldmethod=marker
 
+au! FileType vhdl setlocal commentstring=--%s
+
 " }}}
 
 "small trick to invoke the latex suite when I'm editing something out of
