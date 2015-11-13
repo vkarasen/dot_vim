@@ -46,7 +46,7 @@ filetype on
 set ttyfast
 
 " vim built-in completion
-set wildmenu 
+set wildmenu
 set wildmode=list,full
 
 syntax on
@@ -80,9 +80,6 @@ set autoindent
 
 set nospell
 
-set tabstop=4
-set softtabstop=4
-set expandtab
 
 set cursorline
 set autoread
@@ -97,6 +94,7 @@ set guioptions=m
 
 "best colorscheme out there <3
 silent! colo xoria256
+
 
 "fix backspace
 set backspace=indent,eol,start
@@ -136,18 +134,15 @@ set textwidth=100
 
 
 if &term =~ '256color'
-	" Disable Background Color Erase (BCE) so that color schemes
-	"   " work properly when Vim is used inside tmux and GNU screen.
-	"     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
-	set t_ut=
+    " Disable Background Color Erase (BCE) so that color schemes
+    "   " work properly when Vim is used inside tmux and GNU screen.
+    "     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    set t_ut=
 endif
 
 " }}}
 
 " {{{ Custom Commands
-
-"fast access to the vimrc
-com! Vimrc e ~/.vimrc
 
 com! Be Unite buffer
 
@@ -156,6 +151,10 @@ com! Be Unite buffer
 " {{{ Aucmds
 
 " {{{ Filetype specific options
+
+" locally set tab settings everywhere
+au! BufEnter * setlocal tabstop=4 | setlocal softtabstop=4 | setlocal shiftwidth=4 | setlocal expandtab
+
 au! FileType tex setlocal formatoptions+=t | setlocal spell
 
 au! FileType vim setlocal foldmethod=marker
@@ -194,8 +193,8 @@ nnoremap cd :cd %:h<cr>
 nnoremap <c-h> gT
 nnoremap <c-l> gt
 
-nnoremap L <c-w> l
-nnoremap H <c-w> h
+nnoremap L <c-w>l
+nnoremap H <c-w>h
 
 "j,k now follow wrapped lines
 nnoremap j gj
@@ -207,10 +206,6 @@ nnoremap K 20gk
 
 "remap the join hotkey to M
 vnoremap M J
-
-nnoremap <c-q> <c-u>
-inoremap <c-q> <c-u>
-vnoremap <c-q> <c-u>
 
 nnoremap <silent> <c-u> :nohl<CR>
 
@@ -229,6 +224,9 @@ vnoremap Q gq
 "allow deleting selection without updating the clipboard (yank buffer)
 vnoremap x "_x
 vnoremap X "_X
+
+" search for visually highlighted text
+vmap // y/<C-R>"<CR>
 
 " }}}
 
