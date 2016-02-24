@@ -146,6 +146,8 @@ endif
 
 com! Be Unite buffer
 
+com! Deltrail %s/\s\+$
+
 " }}}
 
 " {{{ Aucmds
