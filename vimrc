@@ -27,7 +27,8 @@ Plugin 'nachumk/systemverilog.vim'
 Plugin 'yegappan/mru'
 Plugin 'Shougo/unite.vim'
 Plugin 'vim-scripts/Super-Shell-Indent'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 if executable('python')
     Plugin 'sjl/gundo.vim'
 endif
