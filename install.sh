@@ -35,7 +35,7 @@ do
    esac
 done
 
-INSTALLPATH=${INSTALLPATH:-$( HOME )}
+INSTALLPATH=${INSTALLPATH:-$HOME}
 
 # Make sure everything is clean before installing
 rm -rf $VERBOSE $INSTALLPATH/.vim*
@@ -43,7 +43,7 @@ rm -rf $VERBOSE $INSTALLPATH/.vim*
 # bootstrap vundle
 git clone https://github.com/VundleVim/Vundle.vim.git $INSTALLPATH/.vim/bundle/Vundle.vim
 
-ln -sf $VERBOSE vimrc $INSTALLPATH/.vimrc
+ln -sf $VERBOSE $(pwd -P)/vimrc $INSTALLPATH/.vimrc
 
 if [ "$INSTALLPATH" != "$HOME" ]
 then
