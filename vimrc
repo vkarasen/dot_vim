@@ -186,6 +186,8 @@ au! FileType vim setlocal foldmethod=marker
 
 au! FileType vhdl setlocal commentstring=--%s
 
+au! FileType sourcelist setlocal commentstring=#%s
+
 " }}}
 
 "small trick to invoke the latex suite when I'm editing something out of
@@ -198,7 +200,9 @@ au! BufEnter wscript* set filetype=python
 
 au! BufEnter *vimrc set filetype=vim
 
-au BufEnter *.do set filetype=tcl
+au! BufEnter *.do set filetype=tcl
+
+au! BufEnter sourcelist set filetype=sourcelist
 
 " sources vim filetypes instantly after writing
 " au! BufWritePost filetype=vim source % | <silent> AirlineRefresh
