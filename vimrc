@@ -19,9 +19,11 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-sleuth'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-jdaddy'
 Plugin 'vim-scripts/xoria256.vim'
 Plugin 'vim-scripts/DrawIt'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'lervag/vimtex'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nachumk/systemverilog.vim'
 Plugin 'yegappan/mru'
@@ -29,6 +31,8 @@ Plugin 'Shougo/unite.vim'
 Plugin 'vim-scripts/Super-Shell-Indent'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'maxbrunsfeld/vim-yankstack'
+
 if executable('python')
     Plugin 'sjl/gundo.vim'
 endif
@@ -101,6 +105,7 @@ silent! colo xoria256
 set backspace=indent,eol,start
 
 let mapleader=";"
+let maplocalleader=";"
 
 " trying no backup
 set nobackup
@@ -140,6 +145,34 @@ if &term =~ '256color'
     "     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
+
+" }}}
+
+"{{{ Plugin specific stuff
+
+" Gundo
+nnoremap <silent> <leader>gt :GundoToggle<CR>
+" this moves the preview window below active window instead of tree
+let g:gundo_preview_bottom = 1
+
+" Yankstack
+call yankstack#setup()
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+" {{{ Statusline
+
+" enable statusline
+set laststatus=2
+set noshowmode
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+let g:airline#extensions#whitespace#enabled = 0
+
+" }}}
 
 " }}}
 
@@ -261,25 +294,3 @@ vmap // y/<C-R>"<CR>
 
 " }}}
 
-"{{{ Plugin specific stuff
-
-" Gundo
-nnoremap <silent> <leader>gt :GundoToggle<CR>
-" this moves the preview window below active window instead of tree
-let g:gundo_preview_bottom = 1
-
-" {{{ Statusline
-
-" enable statusline
-set laststatus=2
-set noshowmode
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
-let g:airline#extensions#ctrlp#show_adjacent_modes = 1
-let g:airline#extensions#whitespace#enabled = 0
-
-" }}}
-
-" }}}

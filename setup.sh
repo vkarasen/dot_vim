@@ -18,7 +18,7 @@ exit 1
 VERBOSE=
 SOURCEPATH=
 
-while getopts "hvp:" OPTION 
+while getopts "hvp:" OPTION
 do
    case $OPTION in
       h)
@@ -35,6 +35,7 @@ do
          ;;
    esac
 done
+
 
 if [[ -z $SOURCEPATH ]]
 then
