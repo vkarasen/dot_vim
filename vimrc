@@ -13,7 +13,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " {{{ Github repositories
-
+Plugin 'tpope/vim-unimpaired'
+Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -174,6 +175,14 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " }}}
 
+" {{{ Syntastic
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" }}}
+
 " }}}
 
 " {{{ Custom Commands
@@ -219,7 +228,7 @@ au! FileType vim setlocal foldmethod=marker
 
 au! FileType vhdl setlocal commentstring=--%s
 
-au! FileType sourcelist setlocal commentstring=#%s
+au! FileType sourcelist setlocal commentstring=//%s
 
 " }}}
 
@@ -235,7 +244,7 @@ au! BufEnter *vimrc set filetype=vim
 
 au! BufEnter *.do set filetype=tcl
 
-au! BufEnter sourcelist set filetype=sourcelist
+au! BufEnter *.slst set filetype=sourcelist
 
 " sources vim filetypes instantly after writing
 " au! BufWritePost filetype=vim source % | <silent> AirlineRefresh
@@ -247,6 +256,18 @@ au! filetype tex hi MatchParen ctermbg=black guibg=black
 " }}}
 
 " {{{ Mappings
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 nnoremap <silent> U :redo<CR>
 
