@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " {{{ Github repositories
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-abolish'
 Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -33,6 +34,11 @@ Plugin 'vim-scripts/Super-Shell-Indent'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'wellle/targets.vim'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'rhysd/clever-f.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tommcdo/vim-lion'
 
 if executable('python')
     Plugin 'sjl/gundo.vim'
@@ -182,6 +188,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " }}}
+
+" lion
+let g:lion_squeeze_spaces = 1
+
+" clever-f
+let g:clever_f_across_no_line = 1
+let g:clever_f_timeout_ms = 3000
 
 " }}}
 
