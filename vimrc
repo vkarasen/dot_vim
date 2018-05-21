@@ -197,6 +197,9 @@ let g:lion_squeeze_spaces = 1
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms = 3000
 
+" vim-polyglot
+let g:polyglot_disabled = ['latex']
+
 " }}}
 
 " {{{ Custom Commands
