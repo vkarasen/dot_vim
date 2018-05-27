@@ -40,6 +40,7 @@ Plugin 'rhysd/clever-f.vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tommcdo/vim-lion'
 Plugin 'vimwiki/vimwiki'
+Plugin 'junegunn/vim-peekaboo'
 
 if executable('python')
     Plugin 'sjl/gundo.vim'
