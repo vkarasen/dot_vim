@@ -33,14 +33,14 @@ Plugin 'Shougo/unite.vim'
 Plugin 'vim-scripts/Super-Shell-Indent'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'maxbrunsfeld/vim-yankstack'
+" Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'wellle/targets.vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'rhysd/clever-f.vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'tommcdo/vim-lion'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/vim-peekaboo'
+Plugin 'guywald1/vim-prismo'
 
 if executable('python')
     Plugin 'sjl/gundo.vim'
@@ -165,9 +165,9 @@ nnoremap <silent> <leader>gt :GundoToggle<CR>
 let g:gundo_preview_bottom = 1
 
 " Yankstack
-call yankstack#setup()
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" call yankstack#setup()
+" nmap <leader>p <Plug>yankstack_substitute_older_paste
+" nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " {{{ Statusline
 
@@ -185,7 +185,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " {{{ Syntastic
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -238,21 +238,17 @@ command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 " {{{ Filetype specific options
 
 " locally set tab settings everywhere
-au! BufEnter * setlocal tabstop=4 | setlocal softtabstop=4 | setlocal shiftwidth=4 | setlocal expandtab
+au! BufEnter * setlocal tabstop=4 | setlocal softtabstop=4 | setlocal shiftwidth=4
 
 au! FileType tex setlocal formatoptions+=t | setlocal spell
 
 au! FileType vim setlocal foldmethod=marker
 
-au! FileType vhdl setlocal commentstring=--%s
+au! FileType vhdl setlocal commentstring=--%s | setlocal foldmethod=marker
 
-au! FileType sourcelist setlocal commentstring=//%s
+au! FileType sourcelist setlocal commentstring=#%s
 
 " }}}
-
-"small trick to invoke the latex suite when I'm editing something out of
-"pentadactyl
-au! BufEnter *.tmp set filetype=tex
 
 au! BufNewFile *.vhd 0r ~/vkarasen-config/vim/skeleton.vhd
 
