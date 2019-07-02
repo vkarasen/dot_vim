@@ -268,7 +268,8 @@ au! Filetype help wincmd L
 au! BufWritePost * if &ft ==# 'vim' | source % | :silent AirlineRefresh | endif
 
 " this hides matching parentheses in tex files
-au! filetype tex hi MatchParen ctermbg=black guibg=black set spell
+au! filetype tex hi MatchParen ctermbg=black guibg=black
+au! filetype tex setlocal spell spelllang=en_us
 
 " }}}
 
