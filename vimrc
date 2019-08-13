@@ -71,16 +71,6 @@ else
     let g:opsystem = substitute(system('uname'), "\n", "", "")
 endif
 
-set listchars=tab:>\ ,trail:\ ,extends:>,precedes:<,nbsp:+
-
-if (g:opsystem != "windows") && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
-    " NOTE: These two lines are NOT the same characgters!
-    " let &listchars = 'tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7'
-     set listchars=tab:▸\ ,extends:⇉,precedes:⇇,nbsp:·,trail:␣
- endif
-
-set list
-
 if v:version >= 703
     set relativenumber
 endif
@@ -109,6 +99,15 @@ set guioptions=m
 "best colorscheme out there <3
 silent! colo xoria256
 
+set listchars=tab:>\ ,trail:\ ,extends:>,precedes:<,nbsp:+
+
+if (g:opsystem != "windows") && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+    " NOTE: These two lines are NOT the same characgters!
+    " let &listchars = 'tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7'
+     set listchars=tab:▸\ ,extends:⇉,precedes:⇇,nbsp:·,trail:␣
+ endif
+
+set list
 
 "fix backspace
 set backspace=indent,eol,start
@@ -154,6 +153,8 @@ if &term =~ '256color'
     "     " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
+
+set diffopt+=vertical
 
 " }}}
 
@@ -259,6 +260,8 @@ au! BufEnter *vimrc set filetype=vim
 au! BufEnter *.do set filetype=tcl
 
 au! BufEnter *.slst set filetype=sourcelist
+
+au! Filetype help wincmd L
 
 " sources vim filetypes instantly after writing
 " au! BufWritePost filetype=vim source % | <silent> AirlineRefresh
