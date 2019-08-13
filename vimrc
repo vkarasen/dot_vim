@@ -192,6 +192,12 @@ let g:syntastic_check_on_wq = 0
 
 " }}}
 
+" {{{ Vimtex
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
+" }}}
+
 " lion
 let g:lion_squeeze_spaces = 1
 
@@ -270,6 +276,8 @@ au! BufWritePost * if &ft ==# 'vim' | source % | :silent AirlineRefresh | endif
 " this hides matching parentheses in tex files
 au! filetype tex hi MatchParen ctermbg=black guibg=black
 au! filetype tex setlocal spell spelllang=en_us
+au! filetype tex setlocal norelativenumber
+au! filetype tex setlocal nocursorline
 
 " }}}
 
