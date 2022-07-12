@@ -41,6 +41,8 @@ Plugin 'tommcdo/vim-lion'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'guywald1/vim-prismo'
+Plugin 'rust-lang/rust.vim'
+Plugin 'neoclide/coc.nvim'
 
 if executable('python')
     Plugin 'sjl/gundo.vim'
